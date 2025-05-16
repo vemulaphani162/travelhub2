@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Travel Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --sunshine: #ffbe0b;
+            --sky: #4cc9f0;
+            --text: #2b2d42;
+            --light: #f8f9fa;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--sunshine));
+            border-radius: 2px;
+        }
+        .tagline {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+        .contact-card {
+            background:#581845;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--accent);
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #e9ecef;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        .phone-icon { background: var(--primary); }
+        .email-icon { background: var(--accent); }
+        .clock-icon { background: var(--secondary); }
+        h3 {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+        .contact-details p, .contact-details a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .contact-details a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        .socials {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .social {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .social:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .fb { background: #3b5998; }
+        .tw { background: #1da1f2; }
+        .ig { background: linear-gradient(45deg, #405de6, #833ab4, #e1306c); }
+        .wa { background: #25d366; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 10px; }
+            .contact-card { padding: 20px; }
+            h1 { font-size: 1.6rem; }
+            .icon { width: 40px; height: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Contact Travel Hub</h1>
+            <p class="tagline">Your journey begins with a conversation</p>
+        </header>
+        
+        <div class="contact-card">
+            <div class="info-item">
+                <div class="icon phone-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="contact-details">
+                    <h3>Call Us</h3>
+                    <a href="tel:9854725123">+91 98547 25123</a>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon email-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-details">
+                    <h3>Email Us</h3>
+                    <a href="mailto:travelhub@gmail.com">travelhub@gmail.com</a>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon clock-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="contact-details">
+                    <h3>Working Hours</h3>
+                    <p>Monday-Friday: 9AM-7PM</p>
+                    <p>Saturday: 10AM-5PM</p>
+                </div>
+            </div>
+            
+            <div class="socials">
+                <a href="#" class="social fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social tw"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social ig"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social wa"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

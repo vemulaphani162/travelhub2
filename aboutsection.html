@@ -1,0 +1,346 @@
+
+<!-- Add this About section just before the footer -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="about-content">
+      <h2 class="about-title">About Travel Hub</h2>
+      
+      <div class="about-story">
+        <h3 class="section-subtitle">Our Story</h3>
+        <p class="section-text">
+          Founded in 2015, Travel Hub began as a small team of passionate travelers with a simple mission: 
+          to make extraordinary travel experiences accessible to everyone. What started as a local tour operator 
+          in Mumbai has grown into one of India's most trusted travel platforms, serving over 50,000 happy travelers.
+        </p>
+      </div>
+      
+      <div class="about-features">
+        <div class="feature-card mission-card">
+          <div class="feature-icon">🌍</div>
+          <h4 class="feature-title">Our Mission</h4>
+          <p class="feature-text">
+            To inspire and enable people to experience the world's cultures, landscapes, and wonders through 
+            carefully crafted journeys that are sustainable, authentic, and unforgettable.
+          </p>
+        </div>
+        
+        <div class="feature-card values-card">
+          <div class="feature-icon">❤️</div>
+          <h4 class="feature-title">Our Values</h4>
+          <ul class="values-list">
+            <li>Authentic travel experiences</li>
+            <li>Sustainable tourism</li>
+            <li>Customer-first approach</li>
+            <li>Local community support</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="why-choose-us">
+        <h3 class="section-subtitle">Why Choose Travel Hub?</h3>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">👨‍✈️</div>
+            <h4 class="benefit-title">Expert Guides</h4>
+            <p class="benefit-text">Our local guides have 5+ years of experience</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">💰</div>
+            <h4 class="benefit-title">Best Value</h4>
+            <p class="benefit-text">Quality experiences at fair prices</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">📞</div>
+            <h4 class="benefit-title">24/7 Support</h4>
+            <p class="benefit-text">Dedicated support throughout your trip</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">✈️</div>
+            <h4 class="benefit-title">5,000+ Tours</h4>
+            <p class="benefit-text">Curated experiences across 50+ countries</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* About Section Variables */
+  :root {
+    --about-primary: #3a86ff;
+    --about-secondary: #1a1a2e;
+    --about-accent: #ffbe0b;
+    --about-light: #f8f9fa;
+    --about-dark: #212529;
+    --about-text: #555;
+    --about-bg: #ffffff;
+    --about-card-bg: #f9f9f9;
+    --about-highlight: rgba(58, 134, 255, 0.1);
+  }
+
+  /* About Section Styles */
+  .about-section {
+    padding: 80px 0;
+    background-color: var(--about-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(58, 134, 255, 0.05) 0%, transparent 50%);
+    z-index: 0;
+  }
+
+  .about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-title {
+    font-size: 36px;
+    color: var(--about-secondary);
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+  }
+
+  .about-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--about-accent);
+    border-radius: 2px;
+  }
+
+  .section-subtitle {
+    font-size: 24px;
+    color: var(--about-primary);
+    margin-bottom: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .section-subtitle:hover {
+    color: var(--about-secondary);
+    transform: translateY(-2px);
+  }
+
+  .section-text {
+    color: var(--about-text);
+    line-height: 1.8;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+  }
+
+  /* Features Grid */
+  .about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .feature-card {
+    background-color: var(--about-card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--about-primary);
+    transition: height 0.4s ease;
+  }
+
+  .feature-card:hover::after {
+    height: 100%;
+  }
+
+  .mission-card:hover {
+    background-color: rgba(58, 134, 255, 0.03);
+  }
+
+  .values-card:hover {
+    background-color: rgba(255, 190, 11, 0.03);
+  }
+
+  .feature-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover .feature-icon {
+    transform: scale(1.2);
+  }
+
+  .feature-title {
+    color: var(--about-secondary);
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .feature-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--about-accent);
+  }
+
+  .feature-text {
+    color: var(--about-text);
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .values-list {
+    text-align: center;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .values-list li {
+    color: var(--about-text);
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+    text-align: left;
+  }
+
+  .values-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--about-accent);
+    font-weight: bold;
+  }
+
+  /* Why Choose Us Section */
+  .why-choose-us {
+    margin-top: 60px;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  .benefit-card {
+    background-color: var(--about-card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .benefit-card:hover {
+    background-color: var(--about-primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(58, 134, 255, 0.2);
+  }
+
+  .benefit-card:hover .benefit-icon,
+  .benefit-card:hover .benefit-title,
+  .benefit-card:hover .benefit-text {
+    color: white;
+  }
+
+  .benefit-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: var(--about-primary);
+    transition: all 0.3s ease;
+  }
+
+  .benefit-title {
+    color: var(--about-secondary);
+    margin-bottom: 10px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+
+  .benefit-text {
+    color: var(--about-text);
+    font-size: 14px;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .about-title {
+      font-size: 30px;
+    }
+    
+    .section-subtitle {
+      font-size: 22px;
+    }
+    
+    .about-features {
+      grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .about-title {
+      font-size: 28px;
+    }
+    
+    .section-text {
+      font-size: 16px;
+    }
+  }
+</style>

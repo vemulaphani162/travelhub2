@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal India Tours</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --summer: #FF9A3C;
+            --monsoon: #3C8DAD;
+            --winter: #6C5B7B;
+            --highlight: #FFF3CD;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5;
+            background: #f8f9fa;
+            color: #333;
+            padding: 10px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin: 10px 0 20px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .season {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .season:hover {
+            transform: translateY(-5px);
+        }
+        .season-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: white;
+        }
+        .summer { background: var(--summer); }
+        .monsoon { background: var(--monsoon); }
+        .winter { background: var(--winter); }
+        
+        .icon-3d {
+            font-size: 1.8rem;
+            margin-right: 12px;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .season-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .season-period {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-left: auto;
+        }
+        .places-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+            gap: 10px;
+        }
+        .place-card {
+            flex: 1 1 200px;
+            min-height: 100px;
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-top: 3px solid;
+            transition: all 0.3s ease;
+        }
+        .place-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .summer-card { border-color: var(--summer); }
+        .monsoon-card { border-color: var(--monsoon); }
+        .winter-card { border-color: var(--winter); }
+        
+        .place-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        .place-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .highlights {
+            background: var(--highlight);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px;
+            font-size: 0.9rem;
+            border-left: 4px solid #FFC107;
+        }
+        .highlights strong {
+            color: #E67E22;
+        }
+        
+        /* Compact mode */
+        .compact .place-card {
+            flex: 1 1 150px;
+            min-height: auto;
+            padding: 8px;
+        }
+        .compact .place-name {
+            font-size: 0.9rem;
+        }
+        .compact .place-desc {
+            font-size: 0.8rem;
+        }
+        .compact-toggle {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Best Seasonal India Tours</h1>
+        <p>Discover perfect destinations for every season</p>
+    </header>
+
+    <!-- Summer Section (Expanded) -->
+    <div class="season">
+        <div class="season-header summer">
+            <i class="fas fa-sun icon-3d"></i>
+            <div class="season-title">Summer Escapes</div>
+            <div class="season-period">March - June</div>
+        </div>
+        <div class="places-container">
+            <div class="place-card summer-card">
+                <div class="place-name">Himachal Pradesh</div>
+                <div class="place-desc">Shimla, Manali, Spiti Valley</div>
+            </div>
+            <div class="place-card summer-card">
+                <div class="place-name">Ladakh</div>
+                <div class="place-desc">Leh, Pangong, Nubra Valley</div>
+            </div>
+            <div class="place-card summer-card">
+                <div class="place-name">Uttarakhand</div>
+                <div class="place-desc">Mussoorie, Nainital, Auli</div>
+            </div>
+            <div class="place-card summer-card">
+                <div class="place-name">South India Hills</div>
+                <div class="place-desc">Ooty, Munnar, Coorg</div>
+            </div>
+            <div class="place-card summer-card">
+                <div class="place-name">Kashmir</div>
+                <div class="place-desc">Gulmarg, Pahalgam, Sonmarg</div>
+            </div>
+            <div class="place-card summer-card">
+                <div class="place-name">Northeast</div>
+                <div class="place-desc">Shillong, Tawang, Gangtok</div>
+            </div>
+            <div class="highlights">
+                <strong>Special Experiences:</strong> Spiti Road Trip, Valley of Flowers, Chadar Trek (if snow remains)
+            </div>
+        </div>
+    </div>
+
+    <!-- Monsoon Section (Expanded) -->
+    <div class="season">
+        <div class="season-header monsoon">
+            <i class="fas fa-cloud-rain icon-3d"></i>
+            <div class="season-title">Monsoon Magic</div>
+            <div class="season-period">July - September</div>
+        </div>
+        <div class="places-container">
+            <div class="place-card monsoon-card">
+                <div class="place-name">Kerala</div>
+                <div class="place-desc">Munnar, Alleppey, Wayanad</div>
+            </div>
+            <div class="place-card monsoon-card">
+                <div class="place-name">Meghalaya</div>
+                <div class="place-desc">Cherrapunji, Mawlynnong</div>
+            </div>
+            <div class="place-card monsoon-card">
+                <div class="place-name">Goa Off-season</div>
+                <div class="place-desc">Quiet beaches, lush greenery</div>
+            </div>
+            <div class="place-card monsoon-card">
+                <div class="place-name">Karnataka</div>
+                <div class="place-desc">Coorg, Chikmagalur, Jog Falls</div>
+            </div>
+            <div class="place-card monsoon-card">
+                <div class="place-name">Maharashtra</div>
+                <div class="place-desc">Lonavala, Mahabaleshwar</div>
+            </div>
+            <div class="place-card monsoon-card">
+                <div class="place-name">Western Ghats</div>
+                <div class="place-desc">Munnar, Kodagu, Agumbe</div>
+            </div>
+            <div class="highlights">
+                <strong>Special Experiences:</strong> Athirappilly Falls, Dudhsagar Train Ride, Monsoon Trekking
+            </div>
+        </div>
+    </div>
+
+    <!-- Winter Section -->
+    <div class="season">
+        <div class="season-header winter">
+            <i class="fas fa-snowflake icon-3d"></i>
+            <div class="season-title">Winter Wonderlands</div>
+            <div class="season-period">October - February</div>
+        </div>
+        <div class="places-container">
+            <div class="place-card winter-card">
+                <div class="place-name">Rajasthan</div>
+                <div class="place-desc">Jaipur, Udaipur, Jaisalmer</div>
+            </div>
+            <div class="place-card winter-card">
+                <div class="place-name">Andaman</div>
+                <div class="place-desc">Havelock, Neil Island</div>
+            </div>
+            <div class="place-card winter-card">
+                <div class="place-name">Wildlife</div>
+                <div class="place-desc">Ranthambore, Kaziranga</div>
+            </div>
+            <div class="place-card winter-card">
+                <div class="place-name">Varanasi</div>
+                <div class="place-desc">Ghats & spirituality</div>
+            </div>
+            <div class="place-card winter-card">
+                <div class="place-name">Kutch</div>
+                <div class="place-desc">White desert festival</div>
+            </div>
+            <div class="place-card winter-card">
+                <div class="place-name">Sikkim</div>
+                <div class="place-desc">Gangtok, Tsomgo Lake</div>
+            </div>
+            <div class="highlights">
+                <strong>Special:</strong> Rann Utsav, Sundarbans Safari
+            </div>
+        </div>
+    </div>
+
+    <div class="compact-toggle" onclick="document.body.classList.toggle('compact')">
+        <i class="fas fa-compress-alt"></i>
+    </div>
+
+    <script>
+        // Add 3D tilt effect to cards
+        document.querySelectorAll('.place-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 15;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 15;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>

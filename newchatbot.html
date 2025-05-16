@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Chatbot</title>
+    <style>
+        /* 3D Animation Styles */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Chatbot Icon Styles with 3D effects */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #4285f4, #3367d6);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4),
+                        0 0 0 4px rgba(255, 255, 255, 0.1),
+                        0 0 0 8px rgba(66, 133, 244, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .chatbot-icon:hover {
+            animation: pulse 1s ease infinite, float 6s ease-in-out infinite;
+            box-shadow: 0 15px 30px rgba(66, 133, 244, 0.5),
+                        0 0 0 4px rgba(255, 255, 255, 0.2),
+                        0 0 0 8px rgba(66, 133, 244, 0.2);
+            transform: translateY(-5px) rotate(5deg);
+        }
+        
+        .chatbot-icon img {
+            width: 60%;
+            height: 60%;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+        
+        /* Chat Container Styles with 3D effects */
+        .chat-container {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px) rotateX(10deg);
+            transform-origin: bottom right;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            perspective: 1000px;
+        }
+        
+        .chat-container.active {
+            width: 400px;
+            height: 500px;
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+                        inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chat-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+        }
+        
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .close-chat:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: linear-gradient(to bottom, #f9f9f9, #eef2f5);
+            perspective: 1000px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: bounceIn 0.5s forwards;
+        }
+        
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.2s; }
+        .message:nth-child(3) { animation-delay: 0.3s; }
+        
+        .user-message {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bot-message {
+            background: linear-gradient(135deg, #f1f1f1, #e0e0e0);
+            color: #333;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: white;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+        
+        #user-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        #user-input:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2),
+                        inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        #send-button {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+        }
+        
+        #send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(66, 133, 244, 0.4);
+        }
+        
+        #send-button:active {
+            transform: translateY(0);
+        }
+        
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            margin-right: auto;
+            background-color: #e0e0e0;
+            border-radius: 18px;
+            width: fit-content;
+            box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #888;
+            border-radius: 50%;
+            margin: 0 3px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-5px) scale(1.2); }
+        }
+        
+        /* 3D Message effects */
+        .user-message::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-left-color: #4285f4;
+            border-right: 0;
+            margin-top: -10px;
+            margin-right: -10px;
+            filter: drop-shadow(2px 0 2px rgba(0,0,0,0.1));
+        }
+        
+        .bot-message::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-right-color: #e0e0e0;
+            border-left: 0;
+            margin-top: -10px;
+            margin-left: -10px;
+            filter: drop-shadow(-2px 0 2px rgba(0,0,0,0.1));
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Chatbot Icon with 3D AI logo -->
+    <div class="chatbot-icon" id="chatbot-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="AI Travel Assistant">
+    </div>
+    
+    <!-- Chat Container with 3D effects -->
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            ✈️ AI Travel Assistant
+            <button class="close-chat" id="close-chat">×</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                Hello! I'm your AI travel assistant. How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ask about destinations, hotels, or flights..." autocomplete="off">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const chatbotIcon = document.getElementById('chatbot-icon');
+        const chatContainer = document.getElementById('chat-container');
+        const closeChat = document.getElementById('close-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        
+        // Enhanced responses for travel chatbot
+        const botResponses = {
+            "hello": "Hello there! ✈️ Ready to plan your next adventure? I can help with destinations, hotels, and travel tips!",
+            "hi": "Hi traveler! 🌍 Where would you like to go today?",
+            "help": "I specialize in: \n• Destination recommendations \n• Hotel bookings \n• Flight information \n• Travel tips \nWhat do you need?",
+            "recommend": "Here are trending destinations: \n🏝️ Bali - Tropical paradise \n🗼 Paris - Romantic getaway \n🏯 Tokyo - Cultural experience \nWhich interests you?",
+            "bye": "Happy travels! ✨ Don't hesitate to return if you need more assistance!",
+            "thank": "You're welcome! 😊 Safe journeys and feel free to ask more!",
+            "hotel": "I can suggest amazing hotels! 🏨 Please tell me: \n1. Destination \n2. Travel dates \n3. Budget range",
+            "flight": "For flights ✈️, I recommend: \n• Booking 6-8 weeks in advance \n• Flying mid-week for best prices \nWhat's your departure city?",
+            "ai": "Yes! 🤖 I'm an AI-powered travel assistant with real-time data to help plan your perfect trip!",
+            "travel": "I love travel planning! 🌎 Tell me about: \n• Your dream destination \n• Travel dates \n• Interests (beaches, culture, adventure)",
+            "weather": "I can check weather forecasts! ⛅ For which destination and dates?",
+            "visa": "Visa requirements vary: \n• Check embassy websites \n• Some countries offer visa-on-arrival \nWhich country are you asking about?",
+            "budget": "Budget tips: \n• Travel offseason \n• Use local transport \n• Book bundled deals \nWhat's your budget range?",
+            "default": "I'm your travel expert! 🧭 Try asking about: \n• Popular destinations \n• Flight tips \n• Hotel recommendations \n• Weather forecasts"
+        };
+        
+        // Toggle chat with 3D animation
+        chatbotIcon.addEventListener('click', () => {
+            chatContainer.classList.add('active');
+            // Add slight bounce effect
+            chatContainer.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                chatContainer.style.transform = 'scale(1)';
+            }, 300);
+        });
+        
+        closeChat.addEventListener('click', () => {
+            chatContainer.classList.remove('active');
+            // Add closing animation
+            chatContainer.style.transform = 'translateY(20px) rotateX(10deg)';
+        });
+        
+        // Add message with 3D effect
+        function addMessage(text, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom with smooth behavior
+            chatMessages.scrollTo({
+                top: chatMessages.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Enhanced typing indicator with 3D effect
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.classList.add('typing-indicator');
+            typingDiv.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            typingDiv.id = 'typing-indicator';
+            typingDiv.style.opacity = '0';
+            typingDiv.style.transform = 'translateY(10px)';
+            chatMessages.appendChild(typingDiv);
+            
+            // Animate in
+            setTimeout(() => {
+                typingDiv.style.opacity = '1';
+                typingDiv.style.transform = 'translateY(0)';
+            }, 10);
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.style.opacity = '0';
+                typingIndicator.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    typingIndicator.remove();
+                }, 300);
+            }
+        }
+        
+        // Process user input with enhanced matching
+        function processInput() {
+            const text = userInput.value.trim().toLowerCase();
+            if (text === '') return;
+            
+            addMessage(text, true);
+            userInput.value = '';
+            
+            // Show typing indicator with animation
+            showTypingIndicator();
+            
+            // Simulate more natural response time
+            const delay = 800 + Math.random() * 1500;
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                
+                let response = botResponses.default;
+                let matchedKeyword = '';
+                
+                // Check for matching keywords with priority
+                const keywords = Object.keys(botResponses);
+                for (const keyword of keywords) {
+                    if (text.includes(keyword) && keyword.length > matchedKeyword.length) {
+                        matchedKeyword = keyword;
+                        response = botResponses[keyword];
+                    }
+                }
+                
+                // Add slight delay between words for more natural feel
+                const words = response.split(' ');
+                let displayedText = '';
+                let wordDelay = 50;
+                
+                words.forEach((word, index) => {
+                    setTimeout(() => {
+                        displayedText += (index > 0 ? ' ' : '') + word;
+                        const lastMessage = chatMessages.lastChild;
+                        if (lastMessage && lastMessage.id !== 'typing-indicator') {
+                            lastMessage.textContent = displayedText;
+                        } else {
+                            addMessage(displayedText, false);
+                        }
+                    }, index * wordDelay);
+                });
+                
+            }, delay);
+        }
+        
+        // Event listeners with animation effects
+        sendButton.addEventListener('click', () => {
+            processInput();
+            // Add button press animation
+            sendButton.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                sendButton.style.transform = 'scale(1)';
+            }, 200);
+        });
+        
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                processInput();
+            }
+        });
+        
+        // Initial greeting sequence with delays
+        setTimeout(() => {
+            addMessage("I can help you plan your dream vacation! 🌴", false);
+        }, 1500);
+        
+        setTimeout(() => {
+            addMessage("Ask me about destinations, flights, hotels, or travel tips!", false);
+        }, 3000);
+        
+        // Add floating animation to chatbot icon
+        setInterval(() => {
+            chatbotIcon.style.transform = `translateY(${Math.sin(Date.now()/800)*5}px) rotate(${Math.sin(Date.now()/1000)*5}deg)`;
+        }, 50);
+        
+        // Add hover effect to messages
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.classList.contains('message')) {
+                e.target.style.transform = 'translateZ(10px)';
+                e.target.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            }
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.classList.contains('message')) {
+                e.target.style.transform = 'translateZ(0)';
+                e.target.style.boxShadow = '';
+            }
+        });
+    </script>
+</body>
+</html>

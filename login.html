@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Explorer | Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        
+        /* Animated background elements */
+        .travel-icon {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            transform: scale(0.95);
+            transition: all 0.4s ease;
+            z-index: 10;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-container:hover {
+            transform: scale(1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+        
+        input {
+            display: block;
+            width: 100%;
+            margin: 15px 0;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+        
+        input:focus {
+            border-color: #6e8efb;
+            box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.2);
+            outline: none;
+            background-color: white;
+        }
+        
+        input::placeholder {
+            color: #aaa;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #feb47b, #ff7e5f);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        /* Travel icons decoration */
+        .travel-icon:nth-child(1) {
+            font-size: 24px;
+            left: 10%;
+            top: 110%;
+            animation-duration: 20s;
+        }
+        
+        .travel-icon:nth-child(2) {
+            font-size: 30px;
+            left: 25%;
+            top: 120%;
+            animation-duration: 25s;
+            animation-delay: 2s;
+        }
+        
+        .travel-icon:nth-child(3) {
+            font-size: 20px;
+            left: 75%;
+            top: 115%;
+            animation-duration: 18s;
+            animation-delay: 1s;
+        }
+        
+        .travel-icon:nth-child(4) {
+            font-size: 28px;
+            left: 90%;
+            top: 105%;
+            animation-duration: 22s;
+            animation-delay: 3s;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .login-container {
+                width: 85%;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative travel icons -->
+    <div class="travel-icon">✈️</div>
+    <div class="travel-icon">🌍</div>
+    <div class="travel-icon">🏝️</div>
+    <div class="travel-icon">🗺️</div>
+    
+    <div class="login-container">
+        <h2>Travel Explorer</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="validateLogin()">Login</button>
+    </div>
+    
+    <script>
+        function validateLogin() {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            if (user === "phani" && pass === "1234") {
+                // Add animation before redirect
+                document.querySelector('.login-container').style.animation = "fadeOut 0.5s forwards";
+                setTimeout(() => {
+                    window.location.href = "webpage.html";
+                }, 500);
+            } else {
+                // Shake animation for invalid login
+                const container = document.querySelector('.login-container');
+                container.style.animation = "shake 0.5s";
+                setTimeout(() => {
+                    container.style.animation = "";
+                }, 500);
+                alert("Invalid username or password");
+            }
+        }
+        
+        // Add keypress event for Enter key
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validateLogin();
+            }
+        });
+        
+        // Add CSS animations dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                20% { transform: translateX(-10px); }
+                40% { transform: translateX(10px); }
+                60% { transform: translateX(-10px); }
+                80% { transform: translateX(10px); }
+            }
+            @keyframes fadeOut {
+                to { opacity: 0; transform: scale(0.9); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

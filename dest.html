@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seasonal Destinations | Travel Hub</title>
+  <style>
+    :root {
+      --primary: #3a86ff;
+      --primary-light: #6ba3ff;
+      --secondary: #1a1a2e;
+      --accent: #ffbe0b;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --spring: #4CAF50;
+      --summer: #FF9800;
+      --monsoon: #2196F3;
+      --autumn: #FF5722;
+      --winter: #03A9F4;
+      --honeymoon: #E91E63;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Season Sections */
+    .season-section {
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .season-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+      z-index: 1;
+    }
+    
+    .season-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+    }
+    
+    .season-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+    
+    .season-title {
+      font-size: 48px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .season-description {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    
+    /* Season Cards Grid */
+    .season-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .season-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .season-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+    
+    .season-card-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .season-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--accent);
+      color: var(--secondary);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .season-card-content {
+      padding: 25px;
+    }
+    
+    .season-card-title {
+      color: var(--secondary);
+      font-size: 22px;
+      margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .season-card-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+    }
+    
+    .season-card-text {
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .package-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .package-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .package-duration {
+      color: var(--dark);
+      font-weight: 500;
+    }
+    
+    .season-highlights {
+      margin-top: 20px;
+    }
+    
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .highlight-icon {
+      margin-right: 10px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 15px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .btn:hover {
+      background-color: var(--secondary);
+    }
+    
+    /* Seasonal Background Colors */
+    .spring-section { background-color: var(--spring); }
+    .summer-section { background-color: var(--summer); }
+    .monsoon-section { background-color: var(--monsoon); }
+    .autumn-section { background-color: var(--autumn); }
+    .winter-section { background-color: var(--winter); }
+    .honeymoon-section { background-color: var(--honeymoon); }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .season-title {
+        font-size: 42px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .season-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .season-title {
+        font-size: 36px;
+      }
+      
+      .season-description {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Spring Destinations -->
+  <section class="season-section spring-section" style="background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+    <div class="container">
+      <div class="season-content">
+        <div class="season-header">
+          <h1 class="season-title">Spring Blossoms</h1>
+          <p class="season-description">
+            Experience nature's renewal with our spring destinations. Flower valleys, pleasant weather, 
+            and vibrant festivals await you from March to May.
+          </p>
+        </div>
+        
+        <div class="season-cards">
+          <!-- Spring Card 1 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1497440001374-f2699730c3c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Best Seller</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Kashmir Tulip Festival</h3>
+              <p class="season-card-text">
+                Witness Asia's largest tulip garden in full bloom with over 1.5 million flowers. 
+                Includes Shikara rides on Dal Lake and Mughal garden tours.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹24,999</span>
+                <span class="package-duration">6 Days / 5 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🌸</span>
+                  <span>Tulip garden entry</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏨</span>
+                  <span>Houseboat stay included</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">📅</span>
+                  <span>March 20 - April 30</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Spring Card 2 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Family Special</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Cherry Blossoms in Shillong</h3>
+              <p class="season-card-text">
+                Explore Meghalaya's pink paradise during cherry blossom season. Includes visits to 
+                living root bridges and Seven Sisters Falls.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹18,500</span>
+                <span class="package-duration">5 Days / 4 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏞️</span>
+                  <span>Cherry blossom walks</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🌉</span>
+                  <span>Living root bridges tour</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">📅</span>
+                  <span>April 1 - May 15</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Spring Card 3 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">New</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Valley of Flowers Trek</h3>
+              <p class="season-card-text">
+                Moderate trek through Uttarakhand's UNESCO site with over 500 flower species. 
+                Includes guide, permits, and camping equipment.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹15,999</span>
+                <span class="package-duration">7 Days / 6 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🥾</span>
+                  <span>Guided trekking</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">⛺</span>
+                  <span>Camping included</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">📅</span>
+                  <span>June 1 - September 30</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Summer Destinations -->
+  <section class="season-section summer-section" style="background-image: url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+    <div class="container">
+      <div class="season-content">
+        <div class="season-header">
+          <h1 class="season-title">Summer Escapes</h1>
+          <p class="season-description">
+            Beat the heat with our cool summer destinations. From hill stations to beaches, 
+            we have perfect getaways for April through June.
+          </p>
+        </div>
+        
+        <div class="season-cards">
+          <!-- Summer Card 1 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Family Favorite</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Shimla-Manali Combo</h3>
+              <p class="season-card-text">
+                7-day luxury tour covering both hill stations with toy train ride, Solang Valley 
+                activities, and heritage hotel stays.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹32,999</span>
+                <span class="package-duration">7 Days / 6 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🚂</span>
+                  <span>Toy train experience</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">⛷️</span>
+                  <span>Solang Valley activities</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏨</span>
+                  <span>4-star accommodations</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Summer Card 2 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Honeymoon</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Andaman Island Retreat</h3>
+              <p class="season-card-text">
+                Romantic 6-day package with private beach dinners, couple spa treatments, 
+                and exclusive snorkeling tours.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹45,500</span>
+                <span class="package-duration">6 Days / 5 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏝️</span>
+                  <span>Private beach dinner</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">💆</span>
+                  <span>Couple spa package</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🤿</span>
+                  <span>Private snorkeling</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Summer Card 3 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Adventure</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Ladakh Bike Expedition</h3>
+              <p class="season-card-text">
+                10-day motorcycle adventure covering Leh, Nubra Valley, and Pangong Lake. 
+                Includes Royal Enfield bike rental and support vehicle.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹38,750</span>
+                <span class="package-duration">10 Days / 9 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏍️</span>
+                  <span>Royal Enfield provided</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🛣️</span>
+                  <span>Support vehicle included</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏕️</span>
+                  <span>Camping under stars</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Monsoon Destinations -->
+  <section class="season-section monsoon-section" style="background-image: url('https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+    <div class="container">
+      <div class="season-content">
+        <div class="season-header">
+          <h1 class="season-title">Monsoon Magic</h1>
+          <p class="season-description">
+            Experience lush landscapes and waterfalls at their peak during July to September. 
+            Special monsoon discounts available.
+          </p>
+        </div>
+        
+        <div class="season-cards">
+          <!-- Monsoon Card 1 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Weekend Getaway</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Munnar Tea Trails</h3>
+              <p class="season-card-text">
+                3-day tea estate stay with guided plantation walks, waterfall visits, 
+                and tea tasting sessions in Kerala's misty hills.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹12,999</span>
+                <span class="package-duration">3 Days / 2 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🍃</span>
+                  <span>Tea estate stay</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🚶</span>
+                  <span>Plantation walks</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">☕</span>
+                  <span>Tea tasting session</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Monsoon Card 2 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1580584126903-c17dab3041e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Luxury</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Kerala Backwater Cruise</h3>
+              <p class="season-card-text">
+                4-day luxury houseboat experience with private chef, monsoon ayurvedic spa 
+                treatments, and village tours.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹28,500</span>
+                <span class="package-duration">4 Days / 3 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🛶</span>
+                  <span>Premium houseboat</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">💆</span>
+                  <span>Ayurvedic spa</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">👨‍🍳</span>
+                  <span>Private chef</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Monsoon Card 3 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Adventure</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Goa Monsoon Special</h3>
+              <p class="season-card-text">
+                5-day package with waterfall treks, spice plantation tours, and indoor 
+                experiences at 40% off peak season rates.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹15,750</span>
+                <span class="package-duration">5 Days / 4 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🌊</span>
+                  <span>Dudhsagar Falls trek</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🌿</span>
+                  <span>Spice plantation tour</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🎭</span>
+                  <span>Cultural performances</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Autumn Destinations -->
+  <section class="season-section autumn-section" style="background-image: url('https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+    <div class="container">
+      <div class="season-content">
+        <div class="season-header">
+          <h1 class="season-title">Autumn Adventures</h1>
+          <p class="season-description">
+            Perfect weather for travel from October to November. Enjoy clear skies, 
+            cultural festivals, and comfortable temperatures.
+          </p>
+        </div>
+        
+        <div class="season-cards">
+          <!-- Autumn Card 1 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Cultural</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Rajasthan Festival Tour</h3>
+              <p class="season-card-text">
+                8-day luxury tour covering Pushkar Camel Fair, Jaipur Literature Festival, 
+                and Udaipur with palace stays.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹42,999</span>
+                <span class="package-duration">8 Days / 7 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🐫</span>
+                  <span>Pushkar Fair entry</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">📚</span>
+                  <span>Literature festival pass</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏰</span>
+                  <span>Heritage palace hotels</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Autumn Card 2 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Photography</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Golden Triangle Photography</h3>
+              <p class="season-card-text">
+                6-day tour with professional photography guide covering Delhi, Agra, 
+                and Jaipur during best lighting conditions.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹35,500</span>
+                <span class="package-duration">6 Days / 5 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">📷</span>
+                  <span>Photo workshop included</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🌅</span>
+                  <span>Golden hour shoots</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏨</span>
+                  <span>Boutique hotels</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Autumn Card 3 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Wildlife</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Ranthambore Tiger Safari</h3>
+              <p class="season-card-text">
+                4-day premium safari package with 6 game drives, luxury tent accommodation, 
+                and naturalist guide.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹28,750</span>
+                <span class="package-duration">4 Days / 3 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🐅</span>
+                  <span>6 safari game drives</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏕️</span>
+                  <span>Luxury tent stay</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🔭</span>
+                  <span>Expert naturalist</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Winter Destinations -->
+  <section class="season-section winter-section" style="background-image: url('https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+    <div class="container">
+      <div class="season-content">
+        <div class="season-header">
+          <h1 class="season-title">Winter Wonderlands</h1>
+          <p class="season-description">
+            From December to February, experience snow adventures, desert festivals, 
+            and cozy mountain retreats.
+          </p>
+        </div>
+        
+        <div class="season-cards">
+          <!-- Winter Card 1 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1517825738774-7de9363ef735?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Ski Package</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Gulmarg Ski Resort</h3>
+              <p class="season-card-text">
+                5-day all-inclusive ski package with equipment, lessons, gondola rides, 
+                and luxury log cabin stays.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹37,500</span>
+                <span class="package-duration">5 Days / 4 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">⛷️</span>
+                  <span>Ski equipment included</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🚠</span>
+                  <span>Gondola cable car rides</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏡</span>
+                  <span>Luxury log cabins</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Winter Card 2 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1518630388551-57b9b39b1923?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Festival</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Jaisalmer Desert Festival</h3>
+              <p class="season-card-text">
+                4-day cultural extravaganza with camel polo, folk performances, 
+                and luxury desert camp experience.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹22,999</span>
+                <span class="package-duration">4 Days / 3 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏜️</span>
+                  <span>Desert festival access</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🎪</span>
+                  <span>Folk performances</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">⛺</span>
+                  <span>Luxury tent stay</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Winter Card 3 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">New Year</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Goa New Year Celebration</h3>
+              <p class="season-card-text">
+                5-day premium package with beach parties, yacht cruise, and 
+                luxury resort stay for New Year's Eve.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹49,999</span>
+                <span class="package-duration">5 Days / 4 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🎉</span>
+                  <span>NYE party access</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">⛵</span>
+                  <span>New Year's yacht cruise</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏖️</span>
+                  <span>Beachfront villa</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Honeymoon Destinations -->
+  <section class="season-section honeymoon-section" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+    <div class="container">
+      <div class="season-content">
+        <div class="season-header">
+          <h1 class="season-title">Romantic Getaways</h1>
+          <p class="season-description">
+            Special honeymoon packages available year-round. Intimate experiences, 
+            private villas, and unforgettable moments.
+          </p>
+        </div>
+        
+        <div class="season-cards">
+          <!-- Honeymoon Card 1 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Bestseller</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Maldives Overwater Paradise</h3>
+              <p class="season-card-text">
+                7-day luxury package with overwater villa, private pool, couple's spa, 
+                and sunset cruises.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹1,25,000</span>
+                <span class="package-duration">7 Days / 6 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏝️</span>
+                  <span>Overwater villa</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">💑</span>
+                  <span>Couple's spa package</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">⛵</span>
+                  <span>Private sunset cruise</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Honeymoon Card 2 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Island</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Andaman Island Romance</h3>
+              <p class="season-card-text">
+                6-day package with private beach dinners, glass bottom boat rides, 
+                and couple's massage sessions.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹58,500</span>
+                <span class="package-duration">6 Days / 5 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🕯️</span>
+                  <span>Beach candlelight dinner</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🚤</span>
+                  <span>Private boat tours</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">💆</span>
+                  <span>Spa treatments</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+          
+          <!-- Honeymoon Card 3 -->
+          <div class="season-card">
+            <div class="season-card-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+              <span class="season-badge">Mountain</span>
+            </div>
+            <div class="season-card-content">
+              <h3 class="season-card-title">Swiss Alps Honeymoon</h3>
+              <p class="season-card-text">
+                8-day European romance with chocolate factory tour, mountain train rides, 
+                and luxury chalet stay.
+              </p>
+              <div class="package-details">
+                <span class="package-price">₹2,15,000</span>
+                <span class="package-duration">8 Days / 7 Nights</span>
+              </div>
+              <div class="season-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon">🚞</span>
+                  <span>Scenic train journeys</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🏔️</span>
+                  <span>Mountain excursions</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon">🍫</span>
+                  <span>Chocolate experience</span>
+                </div>
+              </div>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Call to Action -->
+  <section style="padding: 80px 0; background-color: var(--secondary); text-align: center;">
+    <div class="container">
+      <h2 style="color: white; margin-bottom: 20px; font-size: 36px;">Can't Find Your Perfect Seasonal Package?</h2>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 18px;">
+        Our travel consultants can create a custom itinerary tailored to your preferences, budget, and travel dates.
+      </p>
+      <a href="contact.html" class="btn" style="background-color: var(--accent); color: var(--secondary); font-size: 18px; padding: 15px 40px;">Request Custom Package</a>
+    </div>
+  </section>
+  
+  <!-- Footer (reuse your existing footer) -->
+</body>
+</html>
